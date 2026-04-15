@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulário de Contato</title>
+</head>
+
+<body>
+    <header>
+        <h1>Formulário de Contato</h1>
+    </header>
+    <p>Por favor, preencha o formulário abaixo e clique no botão Enviar Mensagem. Agradecemos por seu contato.</p>
+
+    <main>
+        <form id="contato" method="POST" action="/contato">
+            <fieldset>
+                <legend>Dados Básicos</legend>
+                Nome: <input type="text" name="nome" id="nome" required /><br>
+                E-mail: <input type="email" name="email" id="email" required placeholder="seunome@dominio.com.br" /><br>
+                Website: <input type="text" name="nome" id="nome" required value="http://" /><br>
+            </fieldset>
+            <fieldset>
+                <legend>Seu curso no Instituto de Computação</legend>
+                <input type="radio" name="curso" value="cc" />
+                <label for="cc">Ciência da Computação</label>
+
+                <input type="radio" name="curso" value="es" />
+                <label for="es">Engenharia de Software</label>
+
+                <input type="radio" name="curso" value="ec" />
+                <label for="ec">Engenharia da Computação</label>
+            </fieldset>
+
+            <fieldset>
+                <legend>Assinale as linguaggens já usadas por você:</legend>
+                <label for="java">Java</label>
+                <input type="checkbox" name="ling" id="ling" value="java" />
+
+                <label for="java">Java</label>
+                <input type="checkbox" name="ling" id="ling" value="c" />
+
+                <label for="c">C</label>
+                <input type="checkbox" name="ling" id="ling" value="cpp" />
+
+                <label for="cpp">C++</label>
+                <input type="checkbox" name="ling" id="ling" value="perl" />
+
+                <label for="python">Python</label>
+                <input type="checkbox" name="ling" id="ling" value="python" />
+
+                <label for="javascript">javascript</label>
+                <input type="checkbox" name="ling" id="ling" value="javascript" />
+            </fieldset>
+
+            <fieldset>
+                <legend>Dados Complementares</legend>
+                <label for="cor">Cor favorita</label>
+                <input type="color" name="cor" id="cor" /> <br>
+
+                <label for="data">Data de nascimento</label>
+                <input type="date" name="data" id="data" /> <br>
+
+                <label for="ano">Ano de Entrada em seu Curso do IComp</label>
+                <input type="number" name="ano" id="ano" /><br>
+
+                <label for="nota">Nota para este site</label>
+                <input type="range" name="nota" id="nota" /><br>
+            </fieldset>
+
+            <fieldset>
+                <legend>Área de atuação</legend>
+                <select name="area" id="area">
+                    <option value="1">Banco de Dados</option>
+                    <option value="2">Educação a Distância</option>
+                    <option value="3">Engenharia de Software</option>
+                    <option value="4">Otimização</option>
+                    <option value="5">Programação para a Web</option>
+                    <option value="6">Recuperação de Informação</option>
+                    <option value="7">Redes de Computadores</option>
+                </select>
+            </fieldset>
+
+            <fieldset>
+                <legend>Submeta seu currículo vitae</legend>
+                <input type="file" name="curriculo" />
+            </fieldset>
+
+            <fieldset>
+                <legend>Digite sua Mensagem</legend>
+                <textarea maxlength="55" rows="4" name="mensagem" id="mensagem">Este é o valor padrão!</textarea>
+            </fieldset>
+
+            <button type="reset">Resetar Dados</button>
+            <button type="submit">Enviar Mensagem</button>
+        </form>
+    </main>
+</body>
+
+</html>

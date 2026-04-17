@@ -1,0 +1,36 @@
+body {
+    background-color: #000;
+    background-image: url(nebulosa.png);
+    background-size: auto;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+div {
+    margin: 15vh 0;
+    width: 30vw;
+    padding: 16px;
+    border: 8px solid #ce861a;
+    border-radius: 50px;
+    background-color:rgb(20, 19, 19, 0.7);
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    display: flex;
+}
+
+h1 {
+    color: #fff;
+    font-size: 24px;
+    font-weight: 500;
+    justify-content: center;
+    align-items: center;
+}
+
+p {
+    color: #fff;
+    font-size: 14px;
+    font-;
+    justify-content: center;
+    align-items: center;
+}

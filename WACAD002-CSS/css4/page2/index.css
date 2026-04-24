@@ -1,0 +1,40 @@
+
+.container {
+    display: grid;
+    padding: 5px;
+    gap: 5px;
+    height: 400px;
+    grid-template-areas: "brown brown brown brown"
+                         "green green magenta magenta"
+                         "green green blue orange";
+                    
+}
+
+.container > * {
+    border-radius: 4px;
+}
+
+.container > .brown {
+    background-color:brown;
+    grid-area: brown;
+}
+
+.container > .blue {
+    background-color: blue;
+    grid-area: blue;
+}
+
+.container > .green {
+    background-color:darkgreen;
+    grid-area: green;
+}
+
+.container > .magenta {
+    background-color:darkmagenta;
+    grid-area: magenta;
+}
+
+.container > .orange {
+    background-color:darkorange;
+    grid-area: orange;
+}

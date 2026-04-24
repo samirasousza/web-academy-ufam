@@ -1,14 +1,13 @@
 body {
     background-color: #000;
     background-image: url(nebulosa.png);
-    background-size: auto;
+    background-size: cover;
     background-repeat: no-repeat;
-    background-position: center;
 }
 
 div {
-    margin: 15vh 0;
-    width: 30vw;
+    margin: 15vh 5vw;
+    width: 20vw;
     padding: 16px;
     border: 8px solid #ce861a;
     border-radius: 50px;
@@ -22,15 +21,15 @@ div {
 h1 {
     color: #fff;
     font-size: 24px;
-    font-weight: 500;
+    font-weight: 800;
     justify-content: center;
     align-items: center;
 }
 
 p {
     color: #fff;
-    font-size: 14px;
-    font-;
+    font-size: 18px;
+    text-align: center;
     justify-content: center;
     align-items: center;
 }

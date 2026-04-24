@@ -1,0 +1,90 @@
+body {
+    display: flex;
+    
+}
+
+.container {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: 1fr 1fr 1fr;
+    padding: 5px;
+    gap: 5px
+}
+
+.container .item {
+    border-radius: 4px;
+    height: 100px;
+}
+
+.container > .item:nth-child(1) {
+    background-color:brown;
+    color: brown;
+    grid-row: 1/2;
+    grid-column: 3/5;
+}
+
+.container > .item:nth-child(2) {
+    background-color: blue;
+    grid-row: 1/2;
+    grid-column: 1/3;
+}
+
+.container > .item:nth-child(3) {
+    background-color:darkgreen;
+    grid-row: 2/3;
+    grid-column: 1/2;
+}
+
+.container > .item:nth-child(4) {
+    background-color:darkmagenta;
+    grid-row: 2/3;
+    grid-column: 2/5;
+}
+
+.container > .item:nth-child(5) {
+    background-color:darkorange;
+    grid-row: 3/4;
+    grid-column: 1/5;
+}
+
+.container2 {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-areas: "header header header header"
+                         "main main aside aside"
+                         "main main nav footer";
+    padding: 5px;
+    gap: 5px
+}
+
+.container2 .item2 {
+    border-radius: 4px;
+    height: 100px;
+}
+
+.container > header {
+    background-color:brown;
+    color: brown;
+    grid-area: header;
+}
+
+.container > nav {
+    background-color: blue;
+    grid-area: nav;
+}
+
+.container > main {
+    background-color:darkgreen;
+    grid-area: main;
+}
+
+.container > aside {
+    background-color:darkmagenta;
+    grid-area: aside;
+}
+
+.container > footer {
+    background-color:darkorange;
+    grid-area: footer;
+}

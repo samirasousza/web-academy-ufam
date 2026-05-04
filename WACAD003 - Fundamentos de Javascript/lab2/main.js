@@ -11,10 +11,7 @@ for (let i = 1; i <= 8; i++) {
 }
 
 /* Declaring the alternative text for each image file */
-const altTexts = [];
-for (let i = 1; i <= 8; i++) {
-  altTexts.push(`Macaco ${i}`);
-}
+const altTexts = ["i dont speak macacokkj", "macaco sabio", "macaco im just a girl", "macaco ouvindo musica", "macaco na privada", "macaco em duvida", "macaco joao frango", "macacco por mim"];
 
 /* Looping through images */
 

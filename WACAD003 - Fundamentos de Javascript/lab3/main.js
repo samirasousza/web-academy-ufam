@@ -28,7 +28,7 @@ function getColorByOption(option) {
     case "verde":
       return `rgb(${random(0, 100)}, ${random(100, 255)}, ${random(0, 100)})`;
     default:
-      return randomRGB;
+      return randomRGB();
   }
 }
 
@@ -45,14 +45,14 @@ function randomRGB() {
 }
 
 // Ball constructor
-function Ball(x, y, velX, velY, color, size) {
+function Ball(x, y, velX, velY, color, size, shape) {
   this.x = x;
   this.y = y;
   this.velX = velX;
   this.velY = velY;
   this.color = color;
+  this.shape = shape;
   this.size = size;
-  this.shape = this.shape;
 }
 
 Ball.prototype.draw = function () {
@@ -99,8 +99,8 @@ Ball.prototype.update = function () {
 };
 
 Ball.prototype.collisionDetect = function () {
-  const colorOption = document.getColorOption();
-  const shapeOption = document.getShapeOption();
+  const colorOption = getColorOption();
+  const shapeOption = getShapeOption();
 
   for (let j = 0; j < balls.length; j++) {
     if (!(this === balls[j])) {
@@ -109,7 +109,9 @@ Ball.prototype.collisionDetect = function () {
       const distance = Math.sqrt(dx * dx + dy * dy);
 
       if (distance < this.size + balls[j].size) {
-        balls[j].color = this.color = getColorByOption(colorOption)
+        const newColor = getColorByOption(colorOption);
+        balls[j].color = this.color = newColor;
+        balls[j].shape = this.shape = shapeOption;
       }
     }
   }
@@ -118,8 +120,8 @@ Ball.prototype.collisionDetect = function () {
 let balls = [];
 
 while (balls.length < 25) {
-  const colorOption = document.getColorOption();
-  const shapeOption = document.getShapeOption();
+  const colorOption = getColorOption();
+  const shapeOption = getShapeOption();
 
   let size = random(10, 20);
   let ball = new Ball(
@@ -130,10 +132,9 @@ while (balls.length < 25) {
     random(-7, 7),
     random(-7, 7),
     getColorByOption(colorOption),
-    size
+    size,
+    shapeOption,
   );
-
-  ball.shape(shapeOption);
 
   balls.push(ball);
 }

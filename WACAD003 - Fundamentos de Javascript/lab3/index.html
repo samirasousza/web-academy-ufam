@@ -1,14 +1,64 @@
 <!DOCTYPE html>
 <html lang="en-US">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
     <title>Bouncing balls</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css" />
   </head>
 
   <body>
     <h1>bouncing balls</h1>
+    <div class="options-container">
+      <div class="color-selector">
+        <span>Selecione uma cor:</span>
+        <div class="color-option">
+          <label for="colorido">Colorido</label>
+          <input
+            id="colorido"
+            type="radio"
+            name="color"
+            value="colorido"
+            checked
+          />
+        </div>
+        <div class="color-option">
+          <label for="azul">Azul</label>
+          <input id="azul" type="radio" name="color" value="azul" />
+        </div>
+        <div class="color-option">
+          <label for="verde">Verde</label>
+          <input id="verde" type="radio" name="color" value="verde" />
+        </div>
+        <div class="color-option">
+          <label for="vermelho">Vermelho</label>
+          <input id="vermelho" type="radio" name="color" value="vermelho" />
+        </div>
+      </div>
+
+      <div class="shape-selector">
+        <span>Selecione uma forma:</span>
+        <div class="shape-option">
+          <label for="circulo">Circulo</label>
+          <input
+            id="circulo"
+            type="radio"
+            name="shape"
+            value="circulo"
+            checked
+          />
+        </div>
+        <div class="shape-option">
+          <label for="quadrado">Quadrado</label>
+          <input id="quadrado" type="radio" name="shape" value="quadrado" />
+        </div>
+        <div class="shape-option">
+          <label for="triangulo">Triangulo</label>
+          <input id="triangulo" type="radio" name="shape" value="triangulo" />
+        </div>
+      </div>
+    </div>
+
     <canvas></canvas>
 
     <script src="main.js"></script>

@@ -31,8 +31,19 @@ function Ball(x, y, velX, velY, color, size) {
 Ball.prototype.draw = function () {
   ctx.beginPath();
   ctx.fillStyle = this.color;
-  ctx.arc(this.x, this.y, this.size, 0, 2 * Math.PI);
-  ctx.fill();
+
+  // circulo
+  // ctx.arc(this.x, this.y, this.size, 0, 2 * Math.PI);
+  // ctx.fill();
+
+  // triangulo
+  // ctx.moveTo(this.x, this.y);
+  // ctx.lineTo(this.size, tthis.size/2);
+  // ctx.lineTo(this.size/2, this.size);
+  // ctx.fill();
+
+  // quadrado
+  // ctx.fillRect(this.x, this.y, this.size * 2, this.size * 2);
 };
 
 Ball.prototype.update = function () {
@@ -64,15 +75,44 @@ Ball.prototype.collisionDetect = function () {
       const distance = Math.sqrt(dx * dx + dy * dy);
 
       if (distance < this.size + balls[j].size) {
-        balls[j].color = this.color =
-          "rgb(" +
-          random(0, 255) +
-          "," +
-          random(0, 255) +
-          "," +
-          random(0, 255) +
-          ")";
+        balls[j].color = this.color = "rgb(100, 100, 100)"
+        //COLORIDO
+          // "rgb(" +
+          // random(0, 255) +
+          // "," +
+          // random(0, 255) +
+          // "," +
+          // random(0, 255) +
+          // ")";
+
+          // AZUL
+          // "rgb(" +
+          // random(0, 100) +
+          // "," +
+          // random(0, 100) +
+          // "," +
+          // random(100, 255) +
+          // ")";
+
+          // VERDE
+          // "rgb(" +
+          // random(0, 100) +
+          // "," +
+          // random(100, 255) +
+          // "," +
+          // random(0, 100) +
+          // ")";
+
+          // VERMELHO
+          // "rgb(" +
+          // random(0, 100) +
+          // "," +
+          // random(100, 255) +
+          // "," +
+          // random(0, 100) +
+          // ")";
       }
+
     }
   }
 };
@@ -80,6 +120,9 @@ Ball.prototype.collisionDetect = function () {
 let balls = [];
 
 while (balls.length < 25) {
+  const color = document.getElementsByName("color")
+  const shape = document.getElementsByName("shape")
+  
   let size = random(10, 20);
   let ball = new Ball(
     // ball position always drawn at least one ball width
@@ -88,13 +131,14 @@ while (balls.length < 25) {
     random(0 + size, height - size),
     random(-7, 7),
     random(-7, 7),
-    "rgb(" +
-      random(0, 255) +
-      "," +
-      random(0, 255) +
-      "," +
-      random(0, 255) +
-      ")",
+    "rgb(255, 255, 0)",
+    // "rgb(" +
+    //   random(0, 255) +
+    //   "," +
+    //   random(0, 255) +
+    //   "," +
+    //   random(0, 255) +
+    //   ")",
     size,
   );
 

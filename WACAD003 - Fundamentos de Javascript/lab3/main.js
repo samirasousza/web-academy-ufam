@@ -6,6 +6,32 @@ const ctx = canvas.getContext("2d");
 const width = (canvas.width = window.innerWidth);
 const height = (canvas.height = window.innerHeight);
 
+// function to get the color option
+function getColorOption() {
+  const color = document.querySelector("input[name=color]:checked");
+  return color.id;
+}
+
+// function to get the shape option
+function getShapeOption() {
+  const color = document.querySelector("input[name=shape]:checked");
+  return color.id;
+}
+
+// function to get the rgb by color option
+function getColorByOption(option) {
+  switch (option) {
+    case "azul":
+      return `rgb(${random(0, 100)}, ${random(0, 100)}, ${random(0, 255)})`;
+    case "vermelho":
+      return `rgb(${random(100, 255)}, ${random(0, 100)}, ${random(0, 100)})`;
+    case "verde":
+      return `rgb(${random(0, 100)}, ${random(100, 255)}, ${random(0, 100)})`;
+    default:
+      return randomRGB;
+  }
+}
+
 // function to generate random number
 
 function random(min, max) {
@@ -26,24 +52,29 @@ function Ball(x, y, velX, velY, color, size) {
   this.velY = velY;
   this.color = color;
   this.size = size;
+  this.shape = this.shape;
 }
 
 Ball.prototype.draw = function () {
   ctx.beginPath();
   ctx.fillStyle = this.color;
 
-  // circulo
-  // ctx.arc(this.x, this.y, this.size, 0, 2 * Math.PI);
-  // ctx.fill();
+  if (this.shape === "circulo") {
+    ctx.arc(this.x, this.y, this.size, 0, 2 * Math.PI);
+    ctx.fill();
+  }
 
-  // triangulo
-  // ctx.moveTo(this.x, this.y);
-  // ctx.lineTo(this.size, tthis.size/2);
-  // ctx.lineTo(this.size/2, this.size);
-  // ctx.fill();
+  if (this.shape === "triangulo") {
+    ctx.moveTo(this.x, this.y);
+    ctx.lineTo(this.x + this.size, this.y + this.size * 2);
+    ctx.lineTo(this.x - this.size, this.y + this.size * 2);
+    ctx.closePath();
+    ctx.fill();
+  }
 
-  // quadrado
-  // ctx.fillRect(this.x, this.y, this.size * 2, this.size * 2);
+  if (this.shape === "quadrado") {
+    ctx.fillRect(this.x, this.y, this.size * 2, this.size * 2);
+  }
 };
 
 Ball.prototype.update = function () {
@@ -68,6 +99,9 @@ Ball.prototype.update = function () {
 };
 
 Ball.prototype.collisionDetect = function () {
+  const colorOption = document.getColorOption();
+  const shapeOption = document.getShapeOption();
+
   for (let j = 0; j < balls.length; j++) {
     if (!(this === balls[j])) {
       const dx = this.x - balls[j].x;
@@ -75,44 +109,8 @@ Ball.prototype.collisionDetect = function () {
       const distance = Math.sqrt(dx * dx + dy * dy);
 
       if (distance < this.size + balls[j].size) {
-        balls[j].color = this.color = "rgb(100, 100, 100)"
-        //COLORIDO
-          // "rgb(" +
-          // random(0, 255) +
-          // "," +
-          // random(0, 255) +
-          // "," +
-          // random(0, 255) +
-          // ")";
-
-          // AZUL
-          // "rgb(" +
-          // random(0, 100) +
-          // "," +
-          // random(0, 100) +
-          // "," +
-          // random(100, 255) +
-          // ")";
-
-          // VERDE
-          // "rgb(" +
-          // random(0, 100) +
-          // "," +
-          // random(100, 255) +
-          // "," +
-          // random(0, 100) +
-          // ")";
-
-          // VERMELHO
-          // "rgb(" +
-          // random(0, 100) +
-          // "," +
-          // random(100, 255) +
-          // "," +
-          // random(0, 100) +
-          // ")";
+        balls[j].color = this.color = getColorByOption(colorOption)
       }
-
     }
   }
 };
@@ -120,9 +118,9 @@ Ball.prototype.collisionDetect = function () {
 let balls = [];
 
 while (balls.length < 25) {
-  const color = document.getElementsByName("color")
-  const shape = document.getElementsByName("shape")
-  
+  const colorOption = document.getColorOption();
+  const shapeOption = document.getShapeOption();
+
   let size = random(10, 20);
   let ball = new Ball(
     // ball position always drawn at least one ball width
@@ -131,16 +129,11 @@ while (balls.length < 25) {
     random(0 + size, height - size),
     random(-7, 7),
     random(-7, 7),
-    "rgb(255, 255, 0)",
-    // "rgb(" +
-    //   random(0, 255) +
-    //   "," +
-    //   random(0, 255) +
-    //   "," +
-    //   random(0, 255) +
-    //   ")",
-    size,
+    getColorByOption(colorOption),
+    size
   );
+
+  ball.shape(shapeOption);
 
   balls.push(ball);
 }

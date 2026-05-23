@@ -22,7 +22,7 @@
           <div class="collapse navbar-collapse ms-auto" id="navbarNav">
             <ul class="navbar-nav ms-auto">
               <li class="nav-item">
-                <a class="nav-link" href="#">Menu</a>
+                <a class="nav-link" data-bs-toggle="offcanvas" href="#offcanvasMenu" role="button">Menu</a>
               </li>
             </ul>
           </div>
@@ -38,7 +38,7 @@
           </button>
         </div>
 
-        <div>
+        <div class="rounded overflow-hidden">
           <table class="table">
             <thead class="table-dark">
               <tr>
@@ -51,9 +51,33 @@
             </thead>
             <tbody>
               <tr>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td>01</td>
+                <td>O senhor dos anéis</td>
+                <td>Fantasia</td>
+                <td>
+                    <span class="badge bg-success">Assistido</span>
+                </td>
+                <td>
+                  <button class="btn btn-sm btn-outline-primary">Editar</button>
+                  <button class="btn btn-sm btn-outline-danger">Excluir</button>
+                </td>
+              </tr>
+              <tr>
+                <td>02</td>
+                <td>Interestelar</td>
+                <td>Ficção Científica</td>
+                <td>
+                    <span class="badge bg-warning">Pendente</span>
+                </td>
+                <td>
+                  <button class="btn btn-sm btn-outline-primary">Editar</button>
+                  <button class="btn btn-sm btn-outline-danger">Excluir</button>
+                </td>
+              </tr>
+              <tr>
+                <td>03</td>
+                <td>Matrix</td>
+                <td>Ficção Científica</td>
                 <td>
                     <span class="badge bg-success">Assistido</span>
                 </td>
@@ -102,6 +126,50 @@
             </div>
         </div>
         </div>
+
+        <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasMenu">
+
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title">CineList</h5>
+
+    <button
+      type="button"
+      class="btn-close btn-close-white"
+      data-bs-dismiss="offcanvas"
+      aria-label="Close"
+    ></button>
+  </div>
+
+  <div class="offcanvas-body p-0">
+
+    <div class="list-group list-group-flush">
+
+      <a
+        href="#"
+        class="list-group-item list-group-item-action bg-dark text-white border-secondary"
+      >
+        Dashboard
+      </a>
+
+      <a
+        href="#"
+        class="list-group-item list-group-item-action active"
+        aria-current="true"
+      >
+        Catálogo de Filmes
+      </a>
+
+      <a
+        href="#"
+        class="list-group-item list-group-item-action bg-dark text-white border-secondary"
+      >
+        Gestão de Usuários
+      </a>
+
+    </div>
+
+  </div>
+</div>
 
       </div>
 

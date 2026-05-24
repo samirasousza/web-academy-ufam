@@ -1,19 +1,17 @@
 {
-  "name": "wacad007---fundamentos-de-nodejs",
+  "name": "node2",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "npx nodemon index.js arquivo",
-    "start:prod": "node index.js arquivo"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
-    "dotenv": "^17.4.2",
-    "express": "^5.2.1"
+    "dotenv": "^17.4.2"
   },
   "devDependencies": {
     "nodemon": "^3.1.14"

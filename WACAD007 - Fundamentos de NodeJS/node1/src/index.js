@@ -29,9 +29,12 @@ const servidor = http.createServer((req, res) => {
       if (err) console.log(err);
       else {
         res.writeHead(200, {
-          "content-type": "text/plain;charset=utf-8",
+          "content-type": "text/html;charset=utf-8",
         });
-        res.end(data);
+
+        res.write(`<pre>${data}</pre>`);
+        res.write(`<br><a href="/">Voltar</a>`);
+        res.end();
       }
     });
   }

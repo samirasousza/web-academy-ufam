@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
@@ -13,20 +13,14 @@
   </head>
   <body>
     <div class="container-fluid">
-      <nav class="navbar navbar-expand-lg bg-body-tertiary mb-5">
-        <div class="container row align-items-between">
+      <nav class="navbar navbar-dark bg-dark navbar-expand-lg mb-5">
+        <div
+          class="container-fluid d-flex justify-content-between align-items-center"
+        >
           <a class="navbar-brand" href="#">DevPortifólio</a>
-          <!-- <button
-            class="navbar-toggler"
-            type="button"
-            data-bs-toggler="collapse"
-            data-bs-target="#navbarNav"
-          >
-            <span class="navbar-toggler-icon"></span>
-          </button> -->
 
           <div class="collapse navbar-collapse ms-auto" id="navbarNav">
-            <ul class="navbar-nav">
+            <ul class="navbar-nav ms-auto">
               <li class="nav-item">
                 <a class="nav-link" href="#">Início</a>
               </li>
@@ -43,55 +37,114 @@
         </div>
       </nav>
 
-      <h1 class="mt-3 ml-3">Meus Projetos</h1>
-      
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 gy-3">
-        <div class="card h-100" style="width: 18rem">
-          <img src="..." class="card-img-top" alt="..." />
-          <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">
-              Some quick example text to build on the card title and make up the
-              bulk of the card’s content.
-            </p>
-            <a href="#" class="btn btn-primary w-100">Go somewhere</a>
-          </div>
+      <div class="my-5 mx-5">
+  <h1 class="mb-4 fw-bold">Meus Projetos</h1>
+
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
+
+    <div class="col">
+      <div class="card h-100 shadow-sm">
+
+          <img
+            src="image.png"
+            class="card-img-top mt-2"
+            style="height: 100px; object-fit: contain;"
+            alt="Projeto"
+          />
+
+        <div class="card-body d-flex flex-column">
+          <h5 class="card-title fw-bold">Analisador de Dados</h5>
+
+          <p class="card-text text-muted small">
+            Processamento de dados em larga escala utilizando Python e
+            bibliotecas de IA.
+          </p>
+
+          <a href="#" class="btn btn-primary mt-auto w-100">
+            Ver Repositório
+          </a>
         </div>
-        <div class="card h-100" style="width: 18rem; height: 100px;">
-          <img src="..." class="card-img-top" alt="..." />
-          <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">
-              Some quick example text to build on the card title and make up the
-              bulk of the card’s content.fdjvnkjdfffffffffffffffffffff
-              fdjvnkjdffffffffffffffffffffffffff
-            </p>
-            <a href="#" class="btn btn-secondary disabled" aria-disabled="">Em breve</a>
-          </div>
-        </div>
-        <div class="card h-100" style="width: 18rem">
-          <img src="..." class="card-img-top" alt="..." />
-          <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">
-              Some quick example text to build on the card title and make up the
-              bulk of the card’s content.
-            </p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
-          </div>
-        </div>
-        <div class="card h-100" style="width: 18rem">
-          <img src="..." class="card-img-top" alt="..." />
-          <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">
-              Some quick example text to build on the card title and make up the
-              bulk of the card’s content.
-            </p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
-          </div>
-        </div>
+
       </div>
+    </div>
+
+    <div class="col">
+      <div class="card h-100 shadow-sm">
+
+          <img
+            src="image.png"
+            class="card-img-top mt-2"
+            style="height: 100px; object-fit: contain;"
+            alt="Projeto"
+          />
+
+        <div class="card-body d-flex flex-column">
+          <h5 class="card-title fw-bold">Aplicativo Mobile</h5>
+
+          <p class="card-text text-muted small">
+            Interface moderna para agendamento de consultas médicas em tempo real.
+          </p>
+
+          <a href="#" class="btn btn-secondary mt-auto w-100 disabled">
+            Em breve
+          </a>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="col">
+      <div class="card h-100 shadow-sm">
+
+          <img
+            src="image.png"
+            class="card-img-top mt-2"
+            style="height: 100px; object-fit: contain;"
+            alt="Projeto"
+          />
+
+        <div class="card-body d-flex flex-column">
+          <h5 class="card-title fw-bold">E-commerce API</h5>
+
+          <p class="card-text text-muted small">
+            Sistema de backend robusto para controle de estoque e pagamentos via Pix.
+          </p>
+
+          <a href="#" class="btn btn-primary mt-auto w-100">
+            Ver Documentação
+          </a>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="col">
+      <div class="card h-100 shadow-sm">
+
+          <img
+            src="image.png"
+            class="card-img-top mt-2"
+            style="height: 100px; object-fit: contain;"
+            alt="Projeto"
+          />
+
+        <div class="card-body d-flex flex-column">
+          <h5 class="card-title fw-bold">Predição de Saúde</h5>
+
+          <p class="card-text text-muted small">
+            Pesquisa acadêmica sobre análise de sensores para predição de riscos cardíacos.
+          </p>
+
+          <a href="#" class="btn btn-primary mt-auto w-100">
+            Ver Pesquisa
+          </a>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>
     </div>
 
     <script

@@ -1,5 +1,7 @@
 import fs from "fs/promises";
 import http from "http";
+import { URL } from "url";
+import { loremIpsum } from "lorem-ipsum";
 import { createServer } from "http";
 import { config } from "dotenv";
 import { inc } from "./utils/counter.mjs";
@@ -15,11 +17,14 @@ const server = http.createServer(async (req, res) => {
     res.write(partial1);
     res.write(partial2);
     res.end();
-  }else if (req.url === "/lorem") {
+  }else if (req.url.startsWith("/lorem")) {
     res.writeHead(200, { "content-type": "text/html;charset=utf8" });
     const partial1 = await fs.readFile("public/html/partial1.html");
+
+    const url = new URL (req.url, `http://${req.headers.host}`)
+    const qtdParam = url.searchParams.get("qtd");
     
-    const lorem = "COnjunto de parágrafos lorem"
+    const lorem = loremIpsum({ count: qtdParam, units: "paragraphs" })
     
     const partial2 = await fs.readFile("public/html/partial2.html");
 

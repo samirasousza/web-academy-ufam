@@ -24,7 +24,7 @@ const server = http.createServer(async (req, res) => {
     const url = new URL (req.url, `http://${req.headers.host}`)
     const qtdParam = url.searchParams.get("qtd");
     
-    const lorem = loremIpsum({ count: qtdParam, units: "paragraphs" })
+    const lorem = loremIpsum({ count: qtdParam, suffix: "\n", units: "paragraphs" })
     
     const partial2 = await fs.readFile("public/html/partial2.html");
 
@@ -42,16 +42,3 @@ const server = http.createServer(async (req, res) => {
 });
 
 server.listen(PORT);
-
-// Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-
-// const promise = new Promise((resolve, reject) => {
-//   fs.readFile(`${process.cwd()}/public/1.txt`, "utf-8", (err, content) => {
-//     if (err) reject(err);
-//     else resolve(parseInt(content));
-//   });
-// });
-
-// promise
-// .then((c) => console.log(c))
-// .catch((c) => console.log(c))

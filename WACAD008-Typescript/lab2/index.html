@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      body {
+        background-color: #cbbedd;
+      }
+    </style>
+    <title>Lab2</title>
+  </head>
+  <body>
+    <h2>Estatísticas da Turma</h2>
+
+    <p>Alunos: <span id="numAlunos">0</span></p>
+    <p>Média de idades: <span id="mediaIdades">0</span></p>
+    <p>Média de alturas: <span id="mediaAlturas">0</span></p>
+    <p>Média de pesos: <span id="mediaPesos">0</span></p>
+
+    <h2>Adicionar Aluno</h2>
+
+    <input type="text" id="nome" placeholder="Nome completo" />
+
+    <input type="number" id="idade" placeholder="Idade" />
+
+    <input type="number" id="altura" placeholder="Altura" />
+
+    <input type="number" id="peso" placeholder="Peso" />
+
+    <button id="addBtn">Adicionar Aluno</button>
+
+    <h2>Alunos da Turma</h2>
+
+    <div id="listaAlunos"></div>
+
+    <script type="module" src="./build/js/main.js"></script>
+  </body>
+</html>

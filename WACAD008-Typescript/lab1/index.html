@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      body {
+        background-color: #cbbedd;
+      }
+    </style>
+    <title>To Do List</title>
+  </head>
+  <body>
+    <h1>Reminders</h1>
+
+    <input type="text" id="title" placeholder="Title" />
+
+    <input type="datetime-local" id="deadline" />
+
+    <textarea id="description" placeholder="Description"></textarea>
+
+    <button id="addBtn">Add Reminder</button>
+
+    <div id="message"></div>
+
+    <hr />
+
+    <div id="reminders"></div>
+
+    <script type="module" src="build/js/main.js" defer></script>
+  </body>
+</html>

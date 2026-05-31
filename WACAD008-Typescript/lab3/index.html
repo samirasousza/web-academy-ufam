@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      body {
+        background-color: #cbbedd;
+      }
+    </style>
+    <title>Lab3</title>
+  </head>
+  <body>
+    <h2>Adicionar Produto</h2>
+
+    <select id="tipo">
+      <option value="tv">TV</option>
+      <option value="celular">Celular</option>
+      <option value="bicicleta">Bicicleta</option>
+    </select>
+
+    <input id="modelo" placeholder="Modelo" />
+
+    <input id="fabricante" placeholder="Fabricante" />
+
+    <input id="valor" type="number" placeholder="Valor" />
+
+    <input id="atributo" placeholder="Resolução / Memória / Aro" />
+
+    <button id="btnAdicionar">Adicionar</button>
+
+    <hr />
+
+    <h2>Carrinho</h2>
+
+    <p>Quantidade: <span id="quantidade">0</span></p>
+
+    <p>Total: R$ <span id="total">0.00</span></p>
+
+    <div id="listaProdutos"></div>
+
+    <script type="module" src="./build/js/main.js"></script>
+  </body>
+</html>

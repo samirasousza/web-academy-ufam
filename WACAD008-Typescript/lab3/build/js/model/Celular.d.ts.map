@@ -1,0 +1,1 @@
+{"version":3,"file":"Celular.d.ts","sourceRoot":"","sources":["../../../src/model/Celular.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,OAAO,EAAE,MAAM,cAAc,CAAC;AAEvC,qBAAa,OAAQ,YAAW,OAAO;IAGxB,MAAM,EAAE,MAAM;IACd,UAAU,EAAE,MAAM;IAClB,KAAK,EAAE,MAAM;IACb,OAAO,EAAE,MAAM;gBAHf,MAAM,EAAE,MAAM,EACd,UAAU,EAAE,MAAM,EAClB,KAAK,EAAE,MAAM,EACb,OAAO,EAAE,MAAM;CAE7B"}

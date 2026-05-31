@@ -1,0 +1,1 @@
+{"version":3,"file":"Bicicleta.d.ts","sourceRoot":"","sources":["../../../src/model/Bicicleta.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,OAAO,EAAE,MAAM,cAAc,CAAC;AAEvC,qBAAa,SAAU,YAAW,OAAO;IAG1B,MAAM,EAAE,MAAM;IACd,UAAU,EAAE,MAAM;IAClB,KAAK,EAAE,MAAM;IACb,UAAU,EAAE,MAAM;gBAHlB,MAAM,EAAE,MAAM,EACd,UAAU,EAAE,MAAM,EAClB,KAAK,EAAE,MAAM,EACb,UAAU,EAAE,MAAM;CAEhC"}

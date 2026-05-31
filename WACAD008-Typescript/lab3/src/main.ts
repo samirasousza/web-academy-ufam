@@ -6,104 +6,83 @@ import { Bicicleta } from "./model/Bicicleta.js";
 const carrinho = new Carrinho();
 
 function atualizarCarrinho(): void {
+  const lista = document.getElementById("listaProdutos");
 
-    const lista = document.getElementById("listaProdutos");
+  if (!lista) return;
 
-    if (!lista) return;
+  lista.innerHTML = "";
 
-    lista.innerHTML = "";
+  carrinho.getProdutos().forEach((produto) => {
+    const item = document.createElement("div");
 
-    carrinho.getProdutos().forEach((produto) => {
+    let tipo = "";
 
-        const item = document.createElement("div");
-
-        item.innerHTML = `
-            <p>
-                ${produto.modelo}
-                - ${produto.fabricante}
-                - R$ ${produto.valor.toFixed(2)}
-            </p>
-        `;
-
-        lista.appendChild(item);
-    });
-
-    document.getElementById("quantidade")!.textContent =
-        carrinho.getQuantidade().toString();
-
-    document.getElementById("total")!.textContent =
-        carrinho.getTotal().toFixed(2);
-}
-
-const btnAdicionar =
-    document.getElementById("btnAdicionar");
-
-btnAdicionar?.addEventListener("click", () => {
-
-    const tipo =
-        (document.getElementById("tipo") as HTMLSelectElement)
-        .value;
-
-    const modelo =
-        (document.getElementById("modelo") as HTMLInputElement)
-        .value;
-
-    const fabricante =
-        (document.getElementById("fabricante") as HTMLInputElement)
-        .value;
-
-    const valor =
-        Number(
-            (document.getElementById("valor") as HTMLInputElement)
-            .value
-        );
-
-    const atributo =
-        (document.getElementById("atributo") as HTMLInputElement)
-        .value;
-
-    switch (tipo) {
-
-        case "tv":
-
-            carrinho.adicionar(
-                new TV(
-                    modelo,
-                    fabricante,
-                    valor,
-                    atributo,
-                    55
-                )
-            );
-
-            break;
-
-        case "celular":
-
-            carrinho.adicionar(
-                new Celular(
-                    modelo,
-                    fabricante,
-                    valor,
-                    Number(atributo)
-                )
-            );
-
-            break;
-
-        case "bicicleta":
-
-            carrinho.adicionar(
-                new Bicicleta(
-                    modelo,
-                    fabricante,
-                    valor,
-                    Number(atributo)
-                )
-            );
-
-            break;
+    if (produto instanceof TV) {
+      tipo = "TV";
+    } else if (produto instanceof Celular) {
+      tipo = "Celular";
+    } else if (produto instanceof Bicicleta) {
+      tipo = "Bicicleta";
     }
 
-    atualizarCarrinho();
+    item.innerHTML = `
+    <p>
+        ${tipo} -
+        ${produto.modelo} -
+        ${produto.fabricante} -
+        R$ ${produto.valor.toFixed(2)}
+    </p>
+`;
+
+    lista.appendChild(item);
+  });
+
+  document.getElementById("quantidade")!.textContent = carrinho
+    .getQuantidade()
+    .toString();
+
+  document.getElementById("total")!.textContent = carrinho
+    .getTotal()
+    .toFixed(2);
+}
+
+const btnAdicionar = document.getElementById("btnAdicionar");
+
+btnAdicionar?.addEventListener("click", () => {
+  const tipo = (document.getElementById("tipo") as HTMLSelectElement).value;
+
+  const modelo = (document.getElementById("modelo") as HTMLInputElement).value;
+
+  const fabricante = (document.getElementById("fabricante") as HTMLInputElement)
+    .value;
+
+  const valor = Number(
+    (document.getElementById("valor") as HTMLInputElement).value,
+  );
+
+  const atributo = (document.getElementById("atributo") as HTMLInputElement)
+    .value;
+
+  switch (tipo) {
+    case "tv":
+      carrinho.adicionar(new TV(modelo, fabricante, valor, atributo, 55));
+
+      break;
+
+    case "celular":
+      carrinho.adicionar(
+        new Celular(modelo, fabricante, valor, Number(atributo)),
+      );
+
+      break;
+
+    case "bicicleta":
+      carrinho.adicionar(
+        new Bicicleta(modelo, fabricante, valor, Number(atributo)),
+      );
+
+      break;
+  }
+
+  atualizarCarrinho();
 });

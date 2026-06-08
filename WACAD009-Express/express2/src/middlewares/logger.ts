@@ -19,22 +19,17 @@ function logger(type: LogType) {
   if (type === "simple") {
     return async (req: Request, res: Response, next: NextFunction) => {
       await createLoggerPath();
-      const log = `${(new Date().toISOString(), req.url, req.method)}`;
-      // await fs.appendFile(fileLog.log)
+      const log = `${new Date().toISOString()} | ${req.method} | ${req.url}`;
+      await fs.appendFile(fileLog, log + "\n");
       console.log("simple");
       next();
     };
   } else {
     return async (req: Request, res: Response, next: NextFunction) => {
       await createLoggerPath();
-      const log = `${
-        (new Date().toISOString(),
-        req.url,
-        req.method,
-        req.httpVersion,
-        req.get("User-Agent"))
-      }`;
-      console.log("simple");
+      const log = `${new Date().toISOString()} | ${req.method} | ${req.url} | HTTP/${req.httpVersion} | ${req.get("User-Agent")}`;
+      await fs.appendFile(fileLog, log + "\n");
+      console.log("complete");
       next();
     };
   }

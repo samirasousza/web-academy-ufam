@@ -1,0 +1,58 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Autor {
+  id              Int      @id @default(autoincrement())
+  nome            String
+  data_nascimento DateTime
+  pais_nascimento String
+  nota_biografica String
+
+  livros Livro[] @relation("Cria")
+}
+
+model Livro {
+  codigo String   @id
+  idioma String
+  nome   String
+  ano    DateTime
+
+  edicoes Edicao[]
+  autores Autor[]  @relation("Cria")
+}
+
+model Edicao {
+  isbn        String  @id
+  preco       Decimal
+  ano         Int
+  num_paginas Int
+  qtd_estoque Int
+
+  id_editora Int?
+  editora    Editora? @relation(fields: [id_editora], references: [id])
+
+  livro_codigo String
+  livro        Livro @relation(fields: [livro_codigo], references: [codigo])
+}
+
+model Editora {
+  id       Int    @id @default(autoincrement())
+  telefone String
+  nome     String
+  endereco String
+
+  edicoes Edicao[]
+}

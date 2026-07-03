@@ -29,11 +29,8 @@ export async function productAlreadyExists(name: string): Promise<boolean> {
   return product !== null;
 }
 
-export async function getProduct(id: string): Promise<Product> {
+export async function getProduct(id: string): Promise<Product | null> {
     const product = await prisma.product.findUnique({ where: { id: id } });
-    if (!product) {
-        throw new Error("Product not found");
-    }
     return product;
 }
 

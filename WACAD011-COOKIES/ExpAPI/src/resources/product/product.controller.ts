@@ -1,5 +1,12 @@
 import { Request, Response } from "express";
-import { createProduct, getProduct, updateProduct, productAlreadyExists, getAllProducts, removeProduct } from "./product.service.js";
+import {
+  createProduct,
+  getProduct,
+  updateProduct,
+  productAlreadyExists,
+  getAllProducts,
+  removeProduct,
+} from "./product.service.js";
 import { Prisma } from "../../generated/prisma/client.js";
 import { ReasonPhrases, StatusCodes } from "http-status-codes";
 
@@ -36,53 +43,64 @@ async function create(req: Request, res: Response) {
 }
 
 async function update(req: Request, res: Response) {
-    const product = req.body;
-    try{
-        if (await getProduct(product.id)) {
-            const updatedProduct = await updateProduct(product.id, product);
-            res.status(StatusCodes.OK).json(updatedProduct);
-        } else {
-            res.status(StatusCodes.NOT_FOUND).json({ msg: "Produto não encontrado" });
-        }
-    } catch (err) {
-        res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(err);
+  const product = req.body;
+  try {
+    if (await getProduct(product.id)) {
+      const updatedProduct = await updateProduct(product.id, product);
+      res.status(StatusCodes.OK).json(updatedProduct);
+    } else {
+      res.status(StatusCodes.NOT_FOUND).json({ msg: "Produto não encontrado" });
     }
+  } catch (err) {
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(err);
+  }
 }
 
 async function read(req: Request, res: Response) {
-    const productId = req.body.id;
+  const productId = req.params.id;
 
-    try {
-        const product = await getProduct(productId);
-        res.status(StatusCodes.OK).json(product);
-    } catch (err) {
-        res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(err);
+  if (!productId || Array.isArray(productId)) {
+    return res.status(StatusCodes.BAD_REQUEST).send(ReasonPhrases.BAD_REQUEST);
+  }
+
+  try {
+    const product = await getProduct(productId);
+    if (!product) {
+      return res.status(StatusCodes.NOT_FOUND).send(ReasonPhrases.NOT_FOUND);
     }
+    res.status(StatusCodes.OK).json(product);
+  } catch (err) {
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(err);
+  }
 }
 
-async function index(req:Request, res: Response) {
-    try {
+async function index(req: Request, res: Response) {
+  try {
     const products = await getAllProducts();
     res.status(StatusCodes.OK).json(products);
-} catch (err) {
-    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(err); 
-}
+  } catch (err) {
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(err);
+  }
 }
 
 async function remove(req: Request, res: Response) {
-    const productId = req.body.id;
+  const productId = req.params.id;
 
-    try {
-        const product = await getProduct(productId);
-        if (product) {
-            await removeProduct(productId);
-            res.status(StatusCodes.OK).json({ msg: "Produto removido com sucesso" });
-        } else {
-            res.status(StatusCodes.NOT_FOUND).json({ msg: "Produto não encontrado" });
-        }
-    } catch (err) {
-        res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(err);
+  if (!productId || Array.isArray(productId)) {
+    return res.status(StatusCodes.BAD_REQUEST).send(ReasonPhrases.BAD_REQUEST);
+  }
+
+  try {
+    const product = await getProduct(productId);
+    if (product) {
+      await removeProduct(productId);
+      res.status(StatusCodes.OK).json({ msg: "Produto removido com sucesso" });
+    } else {
+      res.status(StatusCodes.NOT_FOUND).json({ msg: "Produto não encontrado" });
     }
+  } catch (err) {
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(err);
+  }
 }
 
 export default {
@@ -90,5 +108,5 @@ export default {
   update,
   read,
   index,
-  remove
+  remove,
 };

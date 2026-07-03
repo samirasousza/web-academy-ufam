@@ -19,7 +19,7 @@ async function create(req: Request, res: Response) {
     }
     const newProduct = await createProduct(product);
     // res.status(201).json(newProduct);
-    res.status(StatusCodes.OK).json(product);
+    res.status(StatusCodes.CREATED).json(newProduct);
   } catch (err) {
     res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(err);
 
@@ -28,25 +28,31 @@ async function create(req: Request, res: Response) {
         error: "Validation Error",
         message: "The data provided is invalid. ",
       });
-    } else if (err instanceof Prisma.PrismaClientKnownRequestError) {
+    }
+    if (err instanceof Prisma.PrismaClientKnownRequestError) {
       res.status(400).json({
         error: "Database Error",
         message: err.message,
       });
-    } else {
-      res.status(500).json({
-        error: "Internal Server Error",
-        message: "Something went wrong. Please try again later.",
-      });
     }
+    return res.status(500).json({
+      error: "Internal Server Error",
+      message: "Something went wrong. Please try again later.",
+    });
   }
 }
 
 async function update(req: Request, res: Response) {
-  const product = req.body;
+  const productId = req.params.id;
+  const productData = req.body;
+
+  if (!productId || Array.isArray(productId)) {
+    return res.status(StatusCodes.BAD_REQUEST).send(ReasonPhrases.BAD_REQUEST);
+  }
+
   try {
-    if (await getProduct(product.id)) {
-      const updatedProduct = await updateProduct(product.id, product);
+    if (await getProduct(productId)) {
+      const updatedProduct = await updateProduct(productId, productData);
       res.status(StatusCodes.OK).json(updatedProduct);
     } else {
       res.status(StatusCodes.NOT_FOUND).json({ msg: "Produto não encontrado" });

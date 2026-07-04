@@ -15,12 +15,3 @@ export const updateProductSchema = Joi.object({
 export const productIdSchema = Joi.object({
   id: Joi.string().guid({ version: ["uuidv4"] }).required(),
 });
-
-// const celularMoto = {
-//     name: "Smartphone Motorola Edge 30",
-//     price: 1499.00,
-//     stockQuantity: 3
-// };
-
-// const result = schema.validate(celularMoto)
-// result.error == null significa válido

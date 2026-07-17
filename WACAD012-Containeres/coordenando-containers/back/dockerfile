@@ -1,0 +1,11 @@
+FROM node:latest
+
+WORKDIR /app
+
+COPY . .
+
+RUN npm init -y
+
+EXPOSE 4000
+
+CMD ["node", "backend.js"]

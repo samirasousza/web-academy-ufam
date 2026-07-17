@@ -1,0 +1,12 @@
+
+
+docker network create rede-node
+
+docker build -t front-node ./front
+docker build -t back-node ./back
+
+docker run -dit --name frontend --network rede-node -p 3000:3000 front-node
+
+docker run -dit --name backend --network rede-node -p 4000:4000 back-node
+
+docker logs -f backend

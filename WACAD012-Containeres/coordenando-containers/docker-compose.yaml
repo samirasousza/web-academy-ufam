@@ -1,37 +1,23 @@
-version: '7'
-
 services:
-  bdcontainer:
-    container_name: bdcontainer
-    image: mysql:latest
+  backend:
+    build: ./back
+    container_name: backend
+    image: back-node
     ports:
-      - 3306:3306
-    environment:
-       -- MYSQL_ROOT_PASSWORD=pass2023
-    volume:
-      - volume_mysql:/var/liv/mysql
+      - "4000:4000"
     networks:
-      - rede_webacademy
+      - rede-node
 
-bdquicontainer:
-  container_name: bdguicontainer
-  image: phpmyadmin:latest
-  ports:
-    - 8080:8080
-  environment:
-    - PMA_HOST=BDCONTAINER
-    - PMA_PORT=3306
-    - PMA_USER=ROOT
-    - PMA_PASSWOR=pass2023
-  depends_on:
-    - bdcontainer
-  networks:
-    - rede_webacademy
-
+  frontend:
+    build: ./front
+    container_name: frontend
+    image: front-node
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    networks:
+      - rede-node
 
 networks:
-  rede_webacademy:
-    driver: bridge
-
-volumes:
-  volume_mysql
+  rede-node:

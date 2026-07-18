@@ -1,4 +1,7 @@
-import { User } from "../../generated/prisma/client.js";
+import type { User } from "../../generated/prisma/client.js";
 
-export type CreateUserDto = Pick<User, "name" | "email" | "password" | "userTypeId">;
-export type UpdateUserDto = Pick<User, "name" | "email" | "password" | "userTypeId">;
+export type CreateUserDto = Pick<User, "name" | "email" | "password" | "userTypeId">
+
+export type UserDto = Omit<User, "password">;
+
+export type UpdateUserDto = Partial<Pick<User, "name" | "email" | "userTypeId">>;

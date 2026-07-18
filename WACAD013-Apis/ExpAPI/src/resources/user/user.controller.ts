@@ -3,111 +3,77 @@ import {
   createUser,
   getUser,
   updateUser,
-  userAlreadyExists,
+  findUserByEmail,
   getAllUsers,
   removeUser,
 } from "./user.service.js";
 import { Prisma } from "../../generated/prisma/client.js";
 import { ReasonPhrases, StatusCodes } from "http-status-codes";
+import { userErrors } from "./user.errors.js";
+import type { CreateUserDto, UpdateUserDto } from "./user.types.js";
 
-async function create(req: Request, res: Response) {
-  const user = req.body;
+const create = async (req: Request, res: Response) => {
+  const data = req.body as CreateUserDto;
   try {
-    if (await userAlreadyExists(user.name)) {
-      //   return res.status(400).json({ msg: "Produto já existe" });
-      res.status(StatusCodes.CONFLICT).send(ReasonPhrases.CONFLICT);
+    if (await findUserByEmail(data.email)) {
+      return res.status(StatusCodes.CONFLICT).send(ReasonPhrases.CONFLICT)
     }
-    const newUser = await createUser(user);
-    // res.status(201).json(newUser);
-    res.status(StatusCodes.CREATED).json(newUser);
+    const user = await createUser(data);
+    res.status(StatusCodes.CREATED).json(user);
   } catch (err) {
-    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(err);
-
-    if (err instanceof Prisma.PrismaClientValidationError) {
-      res.status(400).json({
-        error: "Validation Error",
-        message: "The data provided is invalid. ",
-      });
-    }
-    if (err instanceof Prisma.PrismaClientKnownRequestError) {
-      res.status(400).json({
-        error: "Database Error",
-        message: err.message,
-      });
-    }
-    return res.status(500).json({
-      error: "Internal Server Error",
-      message: "Something went wrong. Please try again later.",
-    });
+    userErrors(err, res);
   }
-}
+};
 
-async function update(req: Request, res: Response) {
-  const userId = req.params.id;
-  const userData = req.body;
+const update = async (req: Request, res: Response) => {
+  const id = req.params.id as string;
+    try {
+      const updatedUser = req.body as UpdateUserDto;
+      const result = await updateUser(id, updatedUser);
+      if (!result) {
+        return res.status(StatusCodes.NOT_FOUND).json({ message: "Usuário não encontrado" });
+      }
+      res.status(StatusCodes.OK).json(result);
+    } catch (err) {
+      userErrors(err, res);
+    }
+};
 
-  if (!userId || Array.isArray(userId)) {
-    return res.status(StatusCodes.BAD_REQUEST).send(ReasonPhrases.BAD_REQUEST);
-  }
-
+const read = async (req: Request, res: Response) => {
+  const id = req.params.id as string;
   try {
-    if (await getUser(userId)) {
-      const updatedUser = await updateUser(userId, userData);
-      res.status(StatusCodes.OK).json(updatedUser);
-    } else {
-      res.status(StatusCodes.NOT_FOUND).json({ msg: "Produto não encontrado" });
-    }
-  } catch (err) {
-    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(err);
-  }
-}
-
-async function read(req: Request, res: Response) {
-  const userId = req.params.id;
-
-  if (!userId || Array.isArray(userId)) {
-    return res.status(StatusCodes.BAD_REQUEST).send(ReasonPhrases.BAD_REQUEST);
-  }
-
-  try {
-    const user = await getUser(userId);
+    const user = await getUser(id);
     if (!user) {
-      return res.status(StatusCodes.NOT_FOUND).send(ReasonPhrases.NOT_FOUND);
+      return res.status(StatusCodes.NOT_FOUND).json({ message: "Usuário não encontrado" });
     }
     res.status(StatusCodes.OK).json(user);
   } catch (err) {
-    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(err);
+    userErrors(err, res);
   }
-}
+};
 
-async function index(req: Request, res: Response) {
+const index = async (req: Request, res: Response) => {
   try {
     const users = await getAllUsers();
     res.status(StatusCodes.OK).json(users);
-  } catch (err) {
-    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(err);
+  } catch(err) {
+    userErrors(err, res);
   }
-}
+};
 
-async function remove(req: Request, res: Response) {
-  const userId = req.params.id;
-
-  if (!userId || Array.isArray(userId)) {
-    return res.status(StatusCodes.BAD_REQUEST).send(ReasonPhrases.BAD_REQUEST);
-  }
-
-  try {
-    const user = await getUser(userId);
-    if (user) {
-      await removeUser(userId);
-      res.status(StatusCodes.OK).json({ msg: "Produto removido com sucesso" });
-    } else {
-      res.status(StatusCodes.NOT_FOUND).json({ msg: "Produto não encontrado" });
+const remove = async (req: Request, res: Response) => {
+  const id = req.params.id as string;
+    try {
+      const result = await removeUser(id);
+      if (!result) {
+        return res.status(StatusCodes.NOT_FOUND).json({ message: "Usuário não encontrado" });
+      }
+      res.status(StatusCodes.OK).json(result);
+    } catch (err) {
+      userErrors(err, res);
     }
-  } catch (err) {
-    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(err);
-  }
-}
+
+};
 
 export default {
   create,

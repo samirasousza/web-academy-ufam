@@ -1,14 +1,34 @@
 import "dotenv/config";
-import { User } from "../../generated/prisma/client.js";
-import { CreateUserDto } from "./user.types.js";
+import { genSalt, hash } from "bcryptjs";
+import type { CreateUserDto, UpdateUserDto, UserDto } from "./user.types.js";
+import getEnv from "../../utils/validateEnv.js";
 import { prisma } from "../../database/prisma.js";
+// import { prisma } from "../../utils/prismaClient.js";
 
-export async function getAllUsers(): Promise<User[]> {
-  return await prisma.user.findMany();
+const env = getEnv();
+
+export async function getAllUsers(): Promise<UserDto[]> {
+  const users = await prisma.user.findMany();
+  return users.map((u) => {
+    const { password, ...user } = u;
+    return user;
+  });
 }
 
-export async function createUser(user: CreateUserDto) {
-  return await prisma.user.create({ data: user });
+export async function findUserByEmail(email: string): Promise<UserDto | null> {
+    const tempUser = await prisma.user.findFirst({ where: { email }});
+    if (!tempUser) return null;
+    const { password, ...user } = tempUser;
+    return user;
+}
+
+export async function createUser(data: CreateUserDto): Promise<UserDto> {
+  const salt = await genSalt(env.ROUNDS_BCRYPT);
+  const passwordHash = await hash(data.password, salt);
+  const { password, ...user } = await prisma.user.create({
+    data: { ...data, password: passwordHash },
+  });
+  return user;
 }
 
 export async function userAlreadyExists(email: string): Promise<boolean> {
@@ -16,23 +36,21 @@ export async function userAlreadyExists(email: string): Promise<boolean> {
   return user !== null;
 }
 
-export async function getUser(id: string): Promise<User | null> {
-  const user = await prisma.user.findUnique({ where: { id: id } });
-  return user;
+export async function getUser(id: string): Promise<UserDto | null> {
+    const tempUser = await prisma.user.findFirst({ where: { id }});
+    if (!tempUser) return null;
+    const { password, ...user } = tempUser;
+    return user;
 }
 
-export async function updateUser(
-  id: string,
-  user: CreateUserDto,
-): Promise<User> {
-  const updatedUser = await prisma.user.update({
-    where: { id: id },
-    data: user,
-  });
-  return updatedUser;
+export async function updateUser(id: string, data: UpdateUserDto): Promise<UserDto | null> {
+    const tempUser = await prisma.user.findFirst({ where: { id }});
+    if (!tempUser) return null;
+    const { password, ...user } = await prisma.user.update({ where: { id }, data })
+    return user;
 }
 
-export async function removeUser(id: string): Promise<string> {
-  const deletedUser = await prisma.user.delete({ where: { id: id } });
-  return deletedUser.id;
+export async function removeUser(id: string): Promise<UserDto> {
+    const { password, ...user } = await prisma.user.delete({ where: { id }});
+    return user;
 }

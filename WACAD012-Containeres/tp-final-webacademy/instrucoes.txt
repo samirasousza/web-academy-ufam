@@ -1,0 +1,29 @@
+Instruções de execução
+
+Pré-requisito: Docker Desktop instalado e em execução.
+
+1. Clone o repositório.
+2. Acesse a pasta do projeto.
+3. Execute o comando:
+
+
+docker compose up --build
+
+
+Após a inicialização, os serviços estarão disponíveis em:
+
+* Frontend: http://localhost:8000
+* Backend: http://localhost:4444
+* PHPMyAdmin: http://localhost:8080
+
+PHPMyAdmin
+
+* Servidor: mysql
+* Usuário: root
+* Senha: senhasegura
+
+Para encerrar os containers:
+
+docker compose down
+
+link do github: https://github.com/samirasousza/web-academy-ufam/tree/main/WACAD012-Containeres/tp-final-webacademy

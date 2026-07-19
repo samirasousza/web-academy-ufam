@@ -1,0 +1,82 @@
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: mysql-db
+
+    restart: always
+
+    environment:
+      MYSQL_ROOT_PASSWORD: senhasegura
+      MYSQL_DATABASE: livraria
+      MYSQL_USER: user
+      MYSQL_PASSWORD: 123456
+
+    ports:
+      - "3306:3306"
+
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./bd:/docker-entrypoint-initdb.d
+
+    networks:
+      - rede-webacademy
+
+  backend:
+    build: ./backend
+
+    container_name: backend
+
+    depends_on:
+      - mysql
+
+    ports:
+      - "4444:4444"
+
+    env_file:
+      - ./backend/.env
+
+    volumes:
+      - ./backend/log:/app/log
+
+    networks:
+      - rede-webacademy
+  
+  frontend:
+    build: ./frontend
+
+    container_name: frontend
+
+    depends_on:
+      - backend
+
+    ports:
+      - "8000:80"
+
+    networks:
+      - rede-webacademy
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+
+    container_name: phpmyadmin
+
+    restart: always
+
+    ports:
+      - "8080:80"
+
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+
+    depends_on:
+      - mysql
+    
+    networks:
+      - rede-webacademy
+
+networks:
+  rede-webacademy:
+
+volumes:
+  mysql_data:

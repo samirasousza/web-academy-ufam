@@ -3,89 +3,154 @@ import { Product } from "../types/product";
 export const mockProducts: Product[] = [
   {
     id: "notebook-3",
-    images: [
+    fotos: [
       {
-        title: "notebook-4",
+        titulo: "notebook-4",
         src: "https://ranekapi.origamid.dev/wp-content/uploads/2019/03/notebook-2.jpg",
       },
       {
-        title: "smartwatch-3",
+        titulo: "smartwatch-3",
         src: "https://ranekapi.origamid.dev/wp-content/uploads/2019/03/smartwatch-2.jpg",
       },
     ],
-    name: "Notebook",
-    value: "2300",
-    discount: 15,
-    description: "descrição legal",
-    sold: "false",
-    user_id: "lobo@origamid.com",
+    nome: "Notebook",
+    preco: "2300",
+    descricao:
+      "Gostaria de enfatizar que o início da atividade geral de formação de atitudes pode nos levar a considerar.",
+    vendido: "false",
+    usuario_id: "lobo@origamid.com",
   },
   {
     id: "smartphone-2",
-    images: [
+    fotos: [
       {
-        title: "smartphone-3",
+        titulo: "smartphone-3",
         src: "https://ranekapi.origamid.dev/wp-content/uploads/2019/03/smartphone-2.jpg",
       },
       {
-        title: "tablet-3",
+        titulo: "tablet-3",
         src: "https://ranekapi.origamid.dev/wp-content/uploads/2019/03/tablet-2.jpg",
       },
     ],
-    name: "Smartphone",
-    value: "2399",
-    discount: 8,
-    description: "descrição legal",
-    sold: "false",
-    user_id: "lobo@origamid.com",
+    nome: "Smartphone",
+    preco: "2399",
+    descricao:
+      "Gostaria de enfatizar que o início da atividade geral de formação de atitudes pode nos levar a considerar.",
+    vendido: "false",
+    usuario_id: "lobo@origamid.com",
   },
   {
     id: "camera",
-    images: [
+    fotos: [
       {
-        title: "camera-2",
+        titulo: "camera-2",
         src: "https://ranekapi.origamid.dev/wp-content/uploads/2019/03/camera.jpg",
       },
     ],
-    name: "Câmera",
-    value: "2199",
-    discount: 10,
-    description: "descrição legal",
-    sold: "false",
-    user_id: "lobo@origamid.com",
+    nome: "Câmera",
+    preco: "2199",
+    descricao:
+      "Gostaria de enfatizar que o início da atividade geral de formação de atitudes pode nos levar a considerar.",
+    vendido: "false",
+    usuario_id: "lobo@origamid.com",
   },
   {
     id: "smartwatch",
-    images: [
+    fotos: [
       {
-        title: "smartwatch-2",
+        titulo: "smartwatch-2",
         src: "https://ranekapi.origamid.dev/wp-content/uploads/2019/03/smartwatch-1.jpg",
       },
     ],
-    name: "Smartwatch",
-    value: "1199",
-    discount: 8,
-    description: "descrição legal",
-    sold: "false",
-    user_id: "lobo@origamid.com",
+    nome: "Smartwatch",
+    preco: "1199",
+    descricao:
+      "Caros amigos, o comprometimento entre as equipes ainda não demonstrou convincentemente.",
+    vendido: "false",
+    usuario_id: "lobo@origamid.com",
+  },
+  {
+    id: "notebook-2",
+    fotos: [
+      {
+        titulo: "notebook-3",
+        src: "https://ranekapi.origamid.dev/wp-content/uploads/2019/03/notebook-1.jpg",
+      },
+    ],
+    nome: "Notebook",
+    preco: "4999",
+    descricao:
+      "Caros amigos, o comprometimento entre as equipes ainda não demonstrou convincentemente.",
+    vendido: "false",
+    usuario_id: "lobo@origamid.com",
+  },
+  {
+    id: "tablet",
+    fotos: [
+      {
+        titulo: "tablet-2",
+        src: "https://ranekapi.origamid.dev/wp-content/uploads/2019/03/tablet-1.jpg",
+      },
+    ],
+    nome: "Tablet",
+    preco: "1899",
+    descricao:
+      "Gostaria de enfatizar que o início da atividade geral de formação de atitudes pode nos levar a considerar.",
+    vendido: "false",
+    usuario_id: "lobo@origamid.com",
+  },
+  {
+    id: "smartphone",
+    fotos: [
+      {
+        titulo: "smartphone-2",
+        src: "https://ranekapi.origamid.dev/wp-content/uploads/2019/03/smartphone-1.jpg",
+      },
+      {
+        titulo: "smartwatch",
+        src: "https://ranekapi.origamid.dev/wp-content/uploads/2019/03/smartwatch.jpg",
+      },
+    ],
+    nome: "Smartphone",
+    preco: "2333",
+    descricao: "Novo smartphone.",
+    vendido: "false",
+    usuario_id: "joao@gmail.com",
   },
   {
     id: "smartspeaker",
-    images: [
+    fotos: [
       {
-        title: "speaker",
+        titulo: "speaker",
         src: "https://ranekapi.origamid.dev/wp-content/uploads/2019/03/speaker.jpg",
       },
       {
-        title: "tablet",
+        titulo: "tablet",
         src: "https://ranekapi.origamid.dev/wp-content/uploads/2019/03/tablet.jpg",
       },
     ],
-    name: "Smartspeaker",
-    value: "1499",
-    discount: 10,
-    description: "Esse é um speaker novo.",
-    sold: "false",
-    user_id: "maria@origamid.com",
+    nome: "Smartspeaker",
+    preco: "1499",
+    descricao: "Esse é um speaker novo.",
+    vendido: "false",
+    usuario_id: "maria@origamid.com",
+  },
+  {
+    id: "notebook",
+    fotos: [
+      {
+        titulo: "notebook-2",
+        src: "https://ranekapi.origamid.dev/wp-content/uploads/2019/03/notebook.jpg",
+      },
+      {
+        titulo: "smartphone",
+        src: "https://ranekapi.origamid.dev/wp-content/uploads/2019/03/smartphone.jpg",
+      },
+    ],
+    nome: "Notebook",
+    preco: "2499.50",
+    descricao: "Esse é um notebook novo.",
+    vendido: "false",
+    usuario_id: "maria@origamid.com",
   },
 ];

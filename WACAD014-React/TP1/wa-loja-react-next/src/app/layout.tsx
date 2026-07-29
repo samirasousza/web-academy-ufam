@@ -3,6 +3,10 @@ import type { Metadata } from "next";
 import React from "react";
 import Navbar from "./components/Navbar/Navbar";
 import BootstrapClient from "./components/Clients/BootstrapClient";
+import { ReactQueryClientProvider } from "./components/Clients/ReactQueryClient";
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/ReactToastify.css'
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 export const metadata: Metadata = {
   title: "WA loja",
@@ -17,9 +21,13 @@ export default function RootLayout({
   return (
     <html lang="pt-br">
       <body>
-        <Navbar />
-        {children}
-        <BootstrapClient />
+        <ReactQueryClientProvider>
+          <Navbar />
+          {children}
+          <ToastContainer />
+          <BootstrapClient />
+          <ReactQueryDevtools initialIsOpen={false} />
+        </ReactQueryClientProvider>
       </body>
     </html>
   );

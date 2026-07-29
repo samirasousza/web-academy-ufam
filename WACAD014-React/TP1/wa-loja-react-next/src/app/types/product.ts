@@ -1,16 +1,15 @@
 interface imageProduct {
-  title: string;
+  titulo: string;
   src: string;
 }
 
 export interface Product {
   id: string;
-  images: imageProduct[];
-  name: string;
-  value: string;
-  discount: number;
-  description: string;
-  sold: string;
-  user_id: string;
+  fotos: imageProduct[];
+  nome: string;
+  preco: string;
+  descricao: string;
+  vendido: string;
+  usuario_id: string;
   // onAdd: () => void;
 }

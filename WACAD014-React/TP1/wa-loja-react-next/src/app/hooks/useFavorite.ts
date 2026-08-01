@@ -3,7 +3,7 @@
 import { useMutation } from "@tanstack/react-query";
 import { Product } from "../types/product";
 import { toast } from "react-toastify";
-import { addFavorite } from "../services/favorite";
+import { addFavorite } from "../services/favorites";
 
 export function useFavoriteProduct() {
   const { mutate, isPending } = useMutation({

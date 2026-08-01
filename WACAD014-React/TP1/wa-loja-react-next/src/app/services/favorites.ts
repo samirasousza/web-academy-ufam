@@ -14,5 +14,5 @@ export async function getFavoriteList() {
 }
 
 export async function removeFavoriteProduct(id: string) {
-  return favoriteApi.delete(`/favoritos/${id}`);
+  return favoriteApi.delete<Product>(`/favoritos/${id}`);
 }

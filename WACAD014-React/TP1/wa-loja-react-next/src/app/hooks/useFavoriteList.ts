@@ -1,21 +1,17 @@
 "use client";
 
-import { useMutation } from "@tanstack/react-query";
-import { toast } from "react-toastify";
-import { getFavoriteList } from "../services/favorite";
+import { useQuery } from "@tanstack/react-query";
+import { getFavoriteList } from "../services/favorites";
 
 export function useFavoriteList() {
-  const { mutate, isPending } = useMutation({
-    mutationFn: () => getFavoriteList(),
-
-    onSuccess: () => {
-      toast.success("Lista de Produto!");
-    },
-
-    onError: () => {
-      toast.error("Erro ao carregar favoritos.");
-    },
+  const { data, isPending, isError } = useQuery({
+    queryKey: ["favoriteList"],
+    queryFn: getFavoriteList,
   });
 
-  return { getFavoriteList: mutate, isPending };
+  return {
+    favoriteList: data ?? [],
+    isPending,
+    isError,
+  };
 }

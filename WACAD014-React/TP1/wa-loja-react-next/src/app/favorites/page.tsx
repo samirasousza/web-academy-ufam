@@ -1,28 +1,26 @@
 "use client";
 
-import { useState } from "react";
+import { toast } from "react-toastify";
 import FavoriteList from "../components/Favorites/FavoriteList/FavoriteList";
-import { Product } from "../types/product";
+import { useFavoriteList } from "../hooks/useFavoriteList";
 
 export default function Favorites() {
-  const [favItens, setFavItens] = useState<Product[]>([]);
+  const { favoriteList, isPending, isError } = useFavoriteList();
 
-  const removeItemFromFavorites = (id: string): void => {
-    setFavItens((prev) => prev.filter((item) => item.id !== id));
-  };
+  if (isPending) {
+    return <p>Carregando favoritos...</p>;
+  }
 
-
+  if (isError) {
+    toast.error("Erro ao carregar favoritos.");
+  }
 
   return (
     <>
       <main>
         <div className="container p-5">
-          <FavoriteList
-            favoriteItems={favItens}
-            removeItemFromFavorite={removeItemFromFavorites}
-          />
-
-        </div> 
+          <FavoriteList favoriteItems={favoriteList} />
+        </div>
       </main>
     </>
   );

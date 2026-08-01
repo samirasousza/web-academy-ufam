@@ -1,6 +1,18 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
 
 export default function Navbar() {
+  const pathName = usePathname();
+  const router = useRouter();
+
+  if (pathName === "/login" || pathName === "/register") return;
+
+  function logout(){
+    router.push("/login")
+  }
+
   return (
     <nav className="navbar navbar-expand-md bg-light border-bottom border-body sticky-top">
       <div className="container-fluid">
@@ -30,9 +42,14 @@ export default function Navbar() {
                 Carrinho
               </a>
             </li>
+            <li className="nav-item">
+              <a className="nav-link" href="/favorites">
+                Favoritos
+              </a>
+            </li>
           </ul>
 
-          <button className="btn btn-dark">Sair</button>
+          <button className="btn btn-dark" onClick={logout}>Sair</button>
         </div>
       </div>
     </nav>

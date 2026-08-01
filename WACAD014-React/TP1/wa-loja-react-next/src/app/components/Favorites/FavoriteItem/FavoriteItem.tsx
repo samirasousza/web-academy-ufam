@@ -1,16 +1,29 @@
+import { useRemoveFavorite } from "@/app/hooks/useRemoveFavorite";
 import { Product } from "@/app/types/product";
+import { useQueryClient } from "@tanstack/react-query";
+import { toast } from "react-toastify";
 
 interface FavoriteItemProps {
   favoriteItem: Product;
-  removeItemFromFavorite: (id: string) => void;
 }
 
-export default function FavoriteItem(props: FavoriteItemProps) {
-  const { favoriteItem, removeItemFromFavorite } = props;
-  const { id, nome, preco, } = favoriteItem;
+export default function FavoriteItem({ favoriteItem }: FavoriteItemProps) {
+  const { id, nome, preco } = favoriteItem;
+  const queryClient = useQueryClient();
 
-  const getProductTotal = (price: number, quantity: number): number =>
-    price * quantity;
+  const handleSuccess = () => {
+    toast.success("Produto favorito removido!");
+    queryClient.invalidateQueries({ queryKey: ["favoriteList"] });
+  };
+
+  const handleError = () => {
+    toast.error("Erro ao escluir");
+  };
+
+  const { removeFavoriteProduct } = useRemoveFavorite(
+    handleSuccess,
+    handleError,
+  );
 
   return (
     <tr key={id}>
@@ -22,7 +35,7 @@ export default function FavoriteItem(props: FavoriteItemProps) {
       <td>
         <button
           className="btn btn-danger btn-sm"
-          onClick={() => removeItemFromFavorite(id)}
+          onClick={() => removeFavoriteProduct(id)}
         >
           Remover
         </button>

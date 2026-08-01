@@ -5,7 +5,7 @@ import Navbar from "./components/Navbar/Navbar";
 import BootstrapClient from "./components/Clients/BootstrapClient";
 import { ReactQueryClientProvider } from "./components/Clients/ReactQueryClient";
 import { ToastContainer } from "react-toastify";
-import 'react-toastify/ReactToastify.css'
+import "react-toastify/ReactToastify.css";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 export const metadata: Metadata = {

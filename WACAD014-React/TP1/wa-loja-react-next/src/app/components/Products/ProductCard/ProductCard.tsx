@@ -1,6 +1,7 @@
 import { useFavoriteProduct } from "@/app/hooks/useFavorite";
 import { Product } from "@/app/types/product";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 interface ProductCardProps {
   product: Product;
@@ -10,7 +11,13 @@ interface ProductCardProps {
 export default function ProductCard(props: ProductCardProps) {
   const { product, addToCart } = props;
 
+  const router = useRouter();
+
   const { addFavorite, isPending } = useFavoriteProduct();
+
+  const viewProductDetails = (productName: string) => {
+    router.push(`product/${productName}`);
+  };
 
   return (
     <div className="col">
@@ -18,7 +25,9 @@ export default function ProductCard(props: ProductCardProps) {
         <Image
           src={product.fotos[0].src}
           className="card-img-top"
+          style={{ cursor: "pointer" }}
           alt={product.fotos[0].titulo}
+          onClick={() => viewProductDetails(product.nome)}
           width={300}
           height={320}
         />

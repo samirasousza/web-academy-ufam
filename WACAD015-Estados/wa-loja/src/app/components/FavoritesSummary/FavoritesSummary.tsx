@@ -1,33 +1,25 @@
-import { Product } from '@/app/types/product'
-import ProductCard from '../ProductCard/ProductCard'
+import { FavContext } from "@/app/State/FavoritesProvider";
+import ProductCard from "../ProductCard/ProductCard";
+import { useContext } from "react";
 
-interface FavoritesSummaryProps {
-  favorites: Product[]
-  setFavorites: React.Dispatch<React.SetStateAction<Product[]>>
-}
-
-export default function FavoritesSummary({
-  favorites,
-  setFavorites
-}: FavoritesSummaryProps) {
-  const recentFavorites = favorites.slice(-3).reverse()
+export default function FavoritesSummary() {
+  const { favorites } = useContext(FavContext);
+  const recentFavorites = favorites.slice(-3).reverse();
 
   return (
     <>
-      <h5 className='mb-3 mt-4 mt-lg-0 ms-1'>Últimos favoritados:</h5>
+      <h5 className="mb-3 mt-4 mt-lg-0 ms-1">Últimos favoritados:</h5>
 
-      <div className='row row-cols-1 g-3 border rounded-1 pb-3 mt-3 bg-light ms-1'>
+      <div className="row row-cols-1 g-3 border rounded-1 pb-3 mt-3 bg-light ms-1">
         {recentFavorites.length === 0 ? (
           <div>
-            <p className='text-muted'>Sua lista está vazia</p>
+            <p className="text-muted">Sua lista está vazia</p>
           </div>
         ) : (
           recentFavorites.map((product) => (
             <ProductCard
               key={product.id}
               product={product}
-              favorites={favorites}
-              setFavorites={setFavorites}
               showImage={false}
               showButton={false}
             />
@@ -35,5 +27,5 @@ export default function FavoritesSummary({
         )}
       </div>
     </>
-  )
+  );
 }

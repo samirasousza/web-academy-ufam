@@ -1,10 +1,10 @@
 'use client'
-import { useState } from 'react'
+import { useContext } from 'react'
 import FavoritesList from '../components/FavoritesList/FavoritesList'
-import { Product } from '../types/product'
+import { FavContext } from '../State/FavoritesProvider';
 
 export default function FavoritesPage() {
-  const [favorites, setFavorites] = useState<Product[] | []>([])
+  const { favorites, setFavorites } = useContext(FavContext);
 
   return (
     <main>

@@ -1,0 +1,57 @@
+"use client";
+
+import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
+
+export default function Navbar() {
+  const pathName = usePathname();
+  const router = useRouter();
+
+  if (pathName === "/login" || pathName === "/register") return;
+
+  function logout(){
+    router.push("/login")
+  }
+
+  return (
+    <nav className="navbar navbar-expand-md bg-light border-bottom border-body sticky-top">
+      <div className="container-fluid">
+        <Link className="navbar-brand" href="/">
+          WA Loja
+        </Link>
+        <button
+          className="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarCollapse"
+          aria-controls="navbarCollapse"
+          aria-expanded="false"
+          aria-label="Abrir menu"
+        >
+          <span className="navbar-toggler-icon"></span>
+        </button>
+        <div className="collapse navbar-collapse" id="navbarCollapse">
+          <ul className="navbar-nav me-auto mb-2 mb-md-0">
+            <li className="nav-item">
+              <Link className="nav-link" href="/">
+                Início
+              </Link>
+            </li>
+            <li className="nav-item">
+              <a className="nav-link" href="/cart">
+                Carrinho
+              </a>
+            </li>
+            <li className="nav-item">
+              <a className="nav-link" href="/favorites">
+                Favoritos
+              </a>
+            </li>
+          </ul>
+
+          <button className="btn btn-dark" onClick={logout}>Sair</button>
+        </div>
+      </div>
+    </nav>
+  );
+}

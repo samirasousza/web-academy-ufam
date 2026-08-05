@@ -2,7 +2,7 @@
 
 import ProductList from "./components/ProductList/ProductList";
 import { mockProducts } from "./mocks/products";
-import FavoritesProvider from "./State/FavoritesProvider";
+import FavoritesProvider from "./state/FavoritesProvider";
 
 export default function HomePage() {
   const products = mockProducts;

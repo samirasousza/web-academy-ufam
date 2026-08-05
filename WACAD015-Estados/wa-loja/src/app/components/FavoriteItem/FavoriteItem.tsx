@@ -1,3 +1,4 @@
+import { useFavoriteContext } from '@/app/context/useFavoritesContext'
 import { calculateDiscountedPrice } from '@/app/helpers'
 import { Product } from '@/app/types/product'
 import Image from 'next/image'
@@ -11,11 +12,7 @@ export default function FavoriteItem({
   favoriteItem,
   setFavorites
 }: FavoriteItemProps) {
-  const removeFavorite = (id: string) => {
-    setFavorites((currentFavorites) =>
-      currentFavorites.filter((item) => item.id !== id)
-    )
-  }
+  const { removeFavorite } = useFavoriteContext()
 
   return (
     <tr key={favoriteItem.id}>

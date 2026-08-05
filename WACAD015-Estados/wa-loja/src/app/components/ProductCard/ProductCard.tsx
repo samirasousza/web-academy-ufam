@@ -1,8 +1,7 @@
+import { useFavoriteContext } from "@/app/context/useFavoritesContext";
 import { calculateDiscountedPrice } from "@/app/helpers";
-import { FavContext } from "@/app/State/FavoritesProvider";
 import { Product } from "@/app/types/product";
 import Image from "next/image";
-import { useContext } from "react";
 
 interface ProductCardProps {
   product: Product;
@@ -15,13 +14,8 @@ export default function ProductCard({
   showImage = true,
   showButton = true,
 }: ProductCardProps) {
-  const { favorites, setFavorites } = useContext(FavContext);
-
-  const addToFavorites = (productToAdd: Product) => {
-    setFavorites((currentFavorites) => [...currentFavorites, productToAdd]);
-  };
-
-  const isFavorite = favorites.some((item) => item.id === product.id);
+  const { checkIsFavorite, addFavorite } = useFavoriteContext();
+  const isFavorite = checkIsFavorite(product.id);
 
   return (
     <div className="col">
@@ -55,7 +49,7 @@ export default function ProductCard({
                   : "btn btn-secondary d-block w-100"
               }
               type="button"
-              onClick={() => addToFavorites(product)}
+              onClick={() => addFavorite(product)}
               disabled={isFavorite}
             >
               {isFavorite ? "Favoritado" : "Favoritar"}

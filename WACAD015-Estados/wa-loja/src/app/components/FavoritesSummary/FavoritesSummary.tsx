@@ -1,4 +1,4 @@
-import { FavContext } from "@/app/State/FavoritesProvider";
+import { FavContext } from "@/app/state/FavoritesProvider";
 import ProductCard from "../ProductCard/ProductCard";
 import { useContext } from "react";
 

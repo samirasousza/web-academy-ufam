@@ -5,10 +5,23 @@
  * @returns {string} - O primeiro nome extraído do nome completo ou o próprio nome caso não haja espaços.
  */
 function firstName(fullName) {
-  const whitespace = fullName.lastIndexOf(" ");
+  if (typeof fullName !== "string") {
+    return "";
+  }
 
-  if (whitespace === -1) return fullName;
-  else return fullName.slice(0, whitespace);
+  const trimmedName = fullName.trim();
+
+  if (trimmedName === "") {
+    return "";
+  }
+
+  const whitespace = trimmedName.indexOf(" ");
+
+  if (whitespace === -1) {
+    return trimmedName;
+  }
+
+  return trimmedName.slice(0, whitespace);
 }
 
 /**
@@ -29,8 +42,10 @@ function checkStockAvailability(productType, quantity) {
   };
 
   const availableStock = stock[productType];
-  if (availableStock === 0) return false;
-  else return true;
+
+  if (availableStock === undefined) return false;
+
+  return availableStock >= quantity;
 }
 
 /**
@@ -48,10 +63,16 @@ function checkStockAvailability(productType, quantity) {
  *   ]
  */
 function calculateTotalPrice(products) {
-  let total = 0;
-  for (let i = 0; i < products.length; i++) {
-    total = products[i].price;
+  if (!Array.isArray(products)) {
+    return 0;
   }
+
+  let total = 0;
+
+  for (let i = 0; i < products.length; i++) {
+    total += products[i].price * products[i].quantity;
+  }
+
   return total;
 }
 

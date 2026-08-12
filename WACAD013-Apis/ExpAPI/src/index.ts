@@ -7,8 +7,12 @@ import session from "express-session";
 import { v4 as uuidv4 } from "uuid";
 import swaggerUi from "swagger-ui-express";
 import swaggerSpec from "./swagger.js";
+import cookieParser from "cookie-parser";
 
-const cookieParser = require("cookie-parser");
+interface SessionData {
+  uid: string;
+  tipoUsuario: string
+}
 
 dotenv.config({ quiet: true });
 
@@ -17,7 +21,6 @@ const env = getEnv();
 const PORT = env.PORT;
 
 app.use(express.json());
-app.use(router);
 app.use(cookieParser());
 app.use(setLangCookie);
 app.use(
@@ -25,7 +28,7 @@ app.use(
     genid: () => uuidv4(),
     name: "sid",
     secret: env.SESSION_SECRET,
-    resave: false,
+    resave: true,
     saveUninitialized: true,
     cookie: {
       maxAge: 2 * 60 * 60 * 1000,
@@ -34,6 +37,7 @@ app.use(
     },
   }),
 );
+app.use(router);
 app.use("/api", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 app.get("/", (req, res) => {

@@ -8,7 +8,7 @@ const router = Router();
 
 router.use("/products", productRouter);
 router.use("/users", userRouter);
-router.use("/languages", languageRouter);
+router.use("/language", languageRouter);
 router.use("/auth", authRouter);
 
 export default router;

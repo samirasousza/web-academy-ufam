@@ -1,9 +1,9 @@
-import { compare } from "bcryptjs";
+import bcrypt, { compare } from "bcryptjs";
 import { prisma } from "../../database/prisma.js";
 import type { LoginDto } from "./auth.types.js";
 import type { User } from "../../generated/prisma/client.js";
 
-export const checkCredentials = async (
+const checkCredentials = async (
   data: LoginDto,
 ): Promise<User | null> => {
   const user = await prisma.user.findFirst({
@@ -14,3 +14,15 @@ export const checkCredentials = async (
 
   return ok ? user : null;
 };
+
+const checkAuth = async (
+ credenciais: LoginDto,
+): Promise<User | null> => {
+ const { email, password } = credenciais;
+ const user = await prisma.user.findFirst({ where: { email } });
+ if (!user) return null;
+ const ok = await bcrypt.compare(password, user.password);
+ return ok ? user : null;
+}
+
+export { checkCredentials, checkAuth };

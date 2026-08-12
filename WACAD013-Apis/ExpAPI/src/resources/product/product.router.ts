@@ -1,29 +1,27 @@
 import { Router } from "express";
 import productController from "./product.controller.js";
-import { createProductSchema, updateProductSchema, productIdSchema  } from './product.schema.js';
+import { createProductSchema, updateProductSchema, productIdSchema } from './product.schema.js';
 import validate from '../../middlewares/validate.js';
 import isAdmin from "../../middlewares/isAdmin.js";
 
 const router = Router();
-
 /**
-* @openapi
-* /products:
-* get:
-* summary: Lista todos os produtos
-* tags: [Products]
-* responses:
-* 200:
-* description: Lista de produtos
-* content:
-* application/json:
-* schema:
-* type: array
-* items:
-* $ref: '#/components/schemas/Product'
-*/
+ * @openapi
+ * /products:
+ *   get:
+ *     summary: Lista todos os produtos
+ *     tags: [Products]
+ *     responses:
+ *       200:
+ *         description: Lista de produtos
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Product'
+ */
 router.get("/", productController.index);
-
 
 /**
  * @openapi
@@ -47,7 +45,12 @@ router.get("/", productController.index);
  *       403:
  *         description: Usuário não é administrador
  */
-router.post("/", isAdmin, validate(createProductSchema), productController.create);
+router.post(
+  "/",
+  isAdmin,
+  validate(createProductSchema),
+  productController.create,
+);
 
 /**
  * @openapi
@@ -96,10 +99,19 @@ router.get("/:id", productController.read);
  *     responses:
  *       200:
  *         description: Produto atualizado
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Product'
  *       403:
  *         description: Usuário não é administrador
  */
-router.put("/:id", isAdmin, validate(updateProductSchema), productController.update);
+router.put(
+  "/:id",
+  isAdmin,
+  validate(updateProductSchema),
+  productController.update,
+);
 
 /**
  * @openapi

@@ -8,6 +8,22 @@ const router = Router();
 /**
  * @openapi
  * /languages:
+ *   get:
+ *     summary: Obtém o idioma preferido (cookie "lang")
+ *     tags: [Languages]
+ *     responses:
+ *       200:
+ *         description: Idioma obtido
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ChangeLang'
+ */
+router.get("/", languageController.getLanguage);
+
+/**
+ * @openapi
+ * /languages:
  *   post:
  *     summary: Altera o idioma preferido (cookie "lang")
  *     tags: [Languages]
@@ -25,6 +41,8 @@ const router = Router();
  *             schema:
  *               $ref: '#/components/schemas/ChangeLang'
  */
-router.post("/", validate(languageSchema), languageController.changeLanguage);
+router.post("/change", validate(languageSchema), languageController.changeLanguage);
+
+router.delete("/", languageController.clearLanguage);
 
 export default router;

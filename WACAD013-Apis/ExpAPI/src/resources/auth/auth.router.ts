@@ -3,7 +3,6 @@ import authController from "./auth.controller.js";
 
 const router = Router();
 
-
 /**
  * @openapi
  * /auth/signup:

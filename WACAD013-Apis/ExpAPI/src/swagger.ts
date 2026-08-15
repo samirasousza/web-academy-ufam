@@ -22,14 +22,14 @@ const swaggerSpec = swaggerJsdoc({
             id: { type: "string", format: "uuid" },
             name: { type: "string" },
             price: { type: "number", format: "decimal" },
-            stock: { type: "integer" },
+            stockQuantity: { type: "integer" },
             createdAt: { type: "string", format: "date-time" },
             updatedAt: { type: "string", format: "date-time" },
           },
         },
         CreateProduct: {
           type: "object",
-          required: ["name", "price", "stock"],
+          required: ["name", "price", "stockQuantity"],
           properties: {
             name: { type: "string", minLength: 3, maxLength: 50 },
             price: { type: "number", minimum: 0 },
@@ -79,6 +79,57 @@ const swaggerSpec = swaggerJsdoc({
           required: ["lang"],
           properties: {
             lang: { type: "string", enum: ["pt-BR", "en-US"] },
+          },
+        },
+        CartItem: {
+          type: "object",
+          properties: {
+            productId: { type: "string", format: "uuid" },
+            quantity: { type: "integer", minimum: 1 },
+          },
+        },
+        AddCartItem: {
+          type: "object",
+          required: ["productId", "quantity"],
+          properties: {
+            productId: { type: "string", format: "uuid" },
+            quantity: { type: "integer", minimum: 1 },
+          },
+        },
+        UpdateCartItem: {
+          type: "object",
+          required: ["quantity"],
+          properties: {
+            quantity: { type: "integer", minimum: 1 },
+          },
+        },
+        PurchaseItem: {
+          type: "object",
+          properties: {
+            id: { type: "string", format: "uuid" },
+            purchaseId: { type: "string", format: "uuid" },
+            productId: { type: "string", format: "uuid" },
+            quantity: { type: "integer" },
+            product: { $ref: "#/components/schemas/Product" },
+            createdAt: { type: "string", format: "date-time" },
+            updatedAt: { type: "string", format: "date-time" },
+          },
+        },
+        Purchase: {
+          type: "object",
+          properties: {
+            id: { type: "string", format: "uuid" },
+            userId: { type: "string", format: "uuid" },
+            status: {
+              type: "integer",
+              description: "0=opened, 1=finished, 2=canceled",
+            },
+            items: {
+              type: "array",
+              items: { $ref: "#/components/schemas/PurchaseItem" },
+            },
+            createdAt: { type: "string", format: "date-time" },
+            updatedAt: { type: "string", format: "date-time" },
           },
         },
       },

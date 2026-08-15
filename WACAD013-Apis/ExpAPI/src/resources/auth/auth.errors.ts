@@ -1,7 +1,7 @@
-import { PrismaClientKnownRequestError, PrismaClientValidationError } from "@prisma/client/runtime/wasm-compiler-edge";
 import type { Response } from "express";
 import { StatusCodes } from "http-status-codes/build/cjs/status-codes.js";
 import { ReasonPhrases } from "http-status-codes"; 
+import { PrismaClientKnownRequestError, PrismaClientValidationError } from "../../generated/prisma/internal/prismaNamespace.js";
 
 export function authErrors(err: any, res: Response) {
   if (err instanceof NotFoundError) {

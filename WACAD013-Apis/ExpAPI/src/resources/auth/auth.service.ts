@@ -3,9 +3,7 @@ import { prisma } from "../../database/prisma.js";
 import type { LoginDto } from "./auth.types.js";
 import type { User } from "../../generated/prisma/client.js";
 
-const checkCredentials = async (
-  data: LoginDto,
-): Promise<User | null> => {
+const checkCredentials = async (data: LoginDto): Promise<User | null> => {
   const user = await prisma.user.findFirst({
     where: { email: data.email },
   });
@@ -15,14 +13,4 @@ const checkCredentials = async (
   return ok ? user : null;
 };
 
-const checkAuth = async (
- credenciais: LoginDto,
-): Promise<User | null> => {
- const { email, password } = credenciais;
- const user = await prisma.user.findFirst({ where: { email } });
- if (!user) return null;
- const ok = await bcrypt.compare(password, user.password);
- return ok ? user : null;
-}
-
-export { checkCredentials, checkAuth };
+export { checkCredentials};
